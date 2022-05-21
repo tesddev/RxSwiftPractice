@@ -38,6 +38,10 @@ class ViewController: UIViewController {
         table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return table
     }()
+    
+    private var viewModel = ProductViewModel()
+    
+    private var bag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
