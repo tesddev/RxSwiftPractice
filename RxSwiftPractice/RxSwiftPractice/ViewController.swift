@@ -9,6 +9,19 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+struct Product {
+    let imageName: String
+    let imageTitle: String
+}
+
+struct ProductViewModel {
+    var items = PublishSubject<[Product]>()
+    
+    func fetchItems() {
+        
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
