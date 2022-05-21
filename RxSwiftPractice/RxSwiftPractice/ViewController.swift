@@ -59,6 +59,7 @@ class ViewController: UIViewController {
         { row, model, cell in
             cell.textLabel?.text = model.imageTitle
             cell.imageView?.image = UIImage(systemName: model.imageName)
+            cell.selectionStyle = .none
         }.disposed(by: bag)
         
         // Bind a model selected handler
