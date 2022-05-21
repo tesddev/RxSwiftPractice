@@ -22,7 +22,7 @@ struct ProductViewModel {
             Product(imageName: "house", imageTitle: "Home"),
             Product(imageName: "gear", imageTitle: "Settings"),
             Product(imageName: "person.circle", imageTitle: "Profile"),
-            Product(imageName: "airplane ", imageTitle: "Flights"),
+            Product(imageName: "airplane", imageTitle: "Flights"),
             Product(imageName: "bell", imageTitle: "Notification")
         ]
         
@@ -47,6 +47,27 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         tableView.frame = view.bounds
+        bindTableData()
+    }
+    
+    func bindTableData() {
+        // Bind items to table
+        viewModel.items.bind(
+            to: tableView.rx.items(
+                cellIdentifier: "cell",
+                cellType: UITableViewCell.self))
+        { row, model, cell in
+            cell.textLabel?.text = model.imageTitle
+            cell.imageView?.image = UIImage(systemName: model.imageName)
+        }.disposed(by: bag)
+        
+        // Bind a model selected handler
+        tableView.rx.modelSelected(Product.self).bind { product in
+            print(product.imageTitle)
+        }.disposed(by: bag)
+        
+        // fetch items
+        viewModel.fetchItems()
     }
 }
 
